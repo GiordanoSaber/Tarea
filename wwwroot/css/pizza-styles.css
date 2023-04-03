@@ -1,0 +1,9 @@
+.pizza-img-container {
+    max-height: 200px;
+    overflow: hidden;
+}
+
+    .pizza-img-container img {
+        width: auto;
+        max-height: 100%;
+    }

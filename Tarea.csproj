@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="CurrieTechnologies.Blazor.SweetAlert2" Version="0.3.0-preview" />
+  </ItemGroup>
+
 </Project>

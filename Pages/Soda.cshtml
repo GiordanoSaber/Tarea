@@ -1,0 +1,53 @@
+﻿@page
+@using RazorPagesPizza.Models
+@model RazorPagesPizza.Pages.SodaModel
+
+@{
+ViewData["Title"] = "Soda List";
+}
+
+<h1>Giordano Soda</h1>
+<form method="post" class="card p-3">
+    <div class="row">
+        <div asp-validation-summary="All"></div>
+    </div>
+    <div class="form-group mb-0 align-middle">
+        <label asp-for="NewSoda.Name">Name</label>
+        <input type="text" asp-for="NewSoda.Name" class="mr-5">
+        <label asp-for="NewSoda.Size">Size</label>
+        <select asp-for="NewSoda.Size" asp-items="Html.GetEnumSelectList<SodaSize>()" class="mr-5"></select>
+        <label asp-for="NewSoda.Price"></label>
+        <input asp-for="NewSoda.Price" class="mr-5" />
+        <label asp-for="NewSoda.IsDiet">Diet</label>
+        <input type="checkbox" asp-for="NewSoda.IsDiet" class="mr-5">
+        <button class="btn btn-primary">Add</button>
+    </div>
+</form>
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Size</th>
+            <th scope="col">Diet</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    @foreach (var soda in Model.sodas)
+{
+    <tr>
+        <td>@soda.Name</td>
+        <td>@($"{soda.Price:C}")</td>
+        <td>@soda.Size</td>
+        <td>@Model.DietText(soda)</td>
+        <td>
+            <form method="post" asp-page-handler="Delete" asp-route-id="@soda.Id">
+                <button class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+}
+</table>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+} 

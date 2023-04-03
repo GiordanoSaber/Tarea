@@ -1,10 +1,71 @@
 ﻿@page
-@model IndexModel
+@using RazorPagesPizza.Models
+@model RazorPagesPizza.Pages.PizzaModel
+
 @{
     ViewData["Title"] = "Home page";
 }
+<head>
+    <link rel="stylesheet" href="~/css/pizza-styles.css" />
+    
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</head>
+
+<div class="row">
+    @foreach (var pizza in Model.pizzas)
+    {
+    <div class="col-md-4">
+        <div class="card mb-4 box-shadow">
+            <div class="card-body  text-center">
+                <div class="pizza-img-container">
+                    <img src="https://th.bing.com/th/id/OIP.djlnJoe23sxS415sQi--CQHaE8?pid=ImgDet&rs=1" alt="Pizza de queso" class="img-fluid mb-2">
+                </div>
+                <h5 class="card-title">@pizza.Name</h5>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pizzaModal">Order</button>
+            </div>
+        </div>
+    </div>
+    }
 </div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="pizzaModal" tabindex="-1" role="dialog" aria-labelledby="pizzaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pizzaModalLabel">Order Pizza</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Here you can customize your order:</p>
+                <!-- Add pizza order form here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="orderBtn">Ordenar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+        document.getElementById("orderBtn").addEventListener("click", function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Orden recibida!',
+                text: 'Tu pizza llegará en breve',
+                timer: 5000,
+                showConfirmButton: false
+            }).then(function () {
+                window.location.href = '/'; // redirigir a la página principal después de 5 segundos
+            });
+        });
+    </script>
+}
